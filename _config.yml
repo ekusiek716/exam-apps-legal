@@ -1,0 +1,6 @@
+title: 資格試験トレーニングアプリ 法務・サポート
+description: 利用規約・プライバシーポリシー・サポート
+theme: jekyll-theme-minimal
+exclude:
+  - README.md
+  - drafts/
