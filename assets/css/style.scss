@@ -1,0 +1,10 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+// Minimal themeが自動挿入する第三者テーマ作者へのリンクは法務ページに不要。
+// 運営者本人の表示は残し、Hosted/Themeクレジットの段落だけを隠す。
+footer p:last-child {
+  display: none;
+}
