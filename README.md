@@ -21,6 +21,7 @@ GitHub Pages（Jekyll 既定テーマ）でレンダリングしています。
 `drafts/` には、公開ページの元になった日本語ドラフト（プレースホルダ入り）を保管しています。
 
 - `drafts/privacy-policy.md` / `drafts/terms-of-service.md` — 公開ページの原文ドラフト
+- `drafts/community-answers-privacy.md` — 未公開の「みんなの回答」プライバシーポリシー追補案
 
 > **注意:** これらはいずれも**弁護士レビュー前提のドラフト**です。ストア審査提出・本公開の前に、法務専門家によるレビューを受けてください。
 
