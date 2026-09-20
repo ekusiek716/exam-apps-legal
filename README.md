@@ -10,6 +10,7 @@ GitHub Pages（Jekyll 既定テーマ）でレンダリングしています。
 | ページ | パス | URL |
 |---|---|---|
 | サポート（トップ） | `index.md` | https://ekusiek716.github.io/exam-apps-legal/ |
+| お問い合わせ | `support.md` | https://ekusiek716.github.io/exam-apps-legal/support |
 | プライバシーポリシー | `privacy.md` | https://ekusiek716.github.io/exam-apps-legal/privacy |
 | 利用規約 | `terms.md` | https://ekusiek716.github.io/exam-apps-legal/terms |
 | 特定商取引法に基づく表記 | `tokushoho.md` | https://ekusiek716.github.io/exam-apps-legal/tokushoho |
@@ -27,6 +28,11 @@ GitHub Pages（Jekyll 既定テーマ）でレンダリングしています。
 ### 特定商取引法に基づく表記（tokushoho）は公開済み
 
 事業者氏名（奥野 圭祐）確定のため `tokushoho.md` としてページ化し、各ページからリンク済みです。
+
+## お問い合わせフォーム
+
+`support.md` のフォームは、`_config.yml` の `contact_form_endpoint`（Google Apps Script の Web App URL）が設定されているときだけ表示されます。未設定の間はメール窓口のみを掲載します。
+受信用スクリプトは `tools/contact-form.gs`、設定手順（オーナー本人作業）は [`docs/contact-form-setup.md`](docs/contact-form-setup.md) を参照してください。
 
 ## 連絡先
 

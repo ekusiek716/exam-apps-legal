@@ -1,6 +1,12 @@
 title: 資格試験トレーニングアプリ 法務・サポート
 description: 利用規約・プライバシーポリシー・サポート
 theme: jekyll-theme-minimal
+# お問い合わせフォームの送信先（Google Apps Script の Web App URL）。
+# 空のままにするとフォームは表示されず、メール連絡先のみを掲載します。
+# 設定手順は docs/contact-form-setup.md を参照。
+contact_form_endpoint: ""
 exclude:
   - README.md
   - drafts/
+  - docs/
+  - tools/
