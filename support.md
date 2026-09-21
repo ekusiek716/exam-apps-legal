@@ -138,7 +138,7 @@ title: お問い合わせ
     }
 
     var email = document.getElementById('contact-email').value.trim();
-    if (email !== '' && email.indexOf('@') === -1) {
+    if (email !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setStatus('返信用メールアドレスの形式をご確認ください。', 'error');
       document.getElementById('contact-email').focus();
       return;
