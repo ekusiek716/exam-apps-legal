@@ -18,7 +18,7 @@
  *
  * 終了コード: 0 一致 / 1 未反映あり / 2 到達不能（＝未反映の証拠にはならない）
  */
-import { readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -33,6 +33,9 @@ const PAGES = [
   { file: "terms.md", urlPath: "/terms" },
   { file: "tokushoho.md", urlPath: "/tokushoho" },
 ];
+
+/** リポジトリ直下にあるが公開ページではない markdown。 */
+const NON_PAGE_MARKDOWN = new Set(["README.md", "AGENTS.md"]);
 
 /** 短すぎる断片はどのページにも偶然含まれてしまい、検査にならない。 */
 const MIN_UNIT_LENGTH = 12;
@@ -52,12 +55,25 @@ function decodeEntities(text) {
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)))
     .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
     .replace(/&amp;/g, "&");
 }
 
-/** 比較用の正規化。空白は折り返し位置が処理系で変わるため、両側から完全に落とす。 */
-const normalize = (text) => decodeEntities(text).replace(/\s+/gu, "");
+/**
+ * 比較用の正規化。
+ * - 空白は折り返し位置が処理系で変わるため、両側から完全に落とす。
+ * - kramdown は引用符・ダッシュ・三点リーダを活字風に置き換えるため、
+ *   markdown 側の素の文字と一致するよう両側を同じ形へ寄せる。
+ */
+const normalize = (text) =>
+  decodeEntities(text)
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201c\u201d]/g, '"')
+    .replace(/[\u2013\u2014]/g, "-")
+    .replace(/\u2026/g, "...")
+    .replace(/\s+/gu, "");
 
 /** markdown の記法を落とし、本文として配信されるはずの文字列だけにする。 */
 function stripInlineMarkdown(line) {
@@ -79,8 +95,12 @@ export function extractTextUnits(markdown) {
   let liquidDepth = 0;
   for (const rawLine of withoutFrontMatter.split("\n")) {
     const line = rawLine.trim();
-    if (/\{%\s*(end)?(if|unless)\b/.test(line)) {
-      liquidDepth += /\{%\s*end(if|unless)\b/.test(line) ? -1 : 1;
+    const opens = line.match(/\{%\s*(if|unless)\b/g)?.length ?? 0;
+    const closes = line.match(/\{%\s*end(if|unless)\b/g)?.length ?? 0;
+    if (opens > 0 || closes > 0) {
+      // 同一行に開始と終了が両方ある（`{% if %}…{% endif %}`）場合に深さが
+      // 負へ振れないよう、開始と終了を別々に数える。
+      liquidDepth = Math.max(0, liquidDepth + opens - closes);
       continue;
     }
     if (liquidDepth > 0) continue;
@@ -110,7 +130,36 @@ export function htmlToText(html) {
     .replace(/<[^>]+>/g, " ");
 }
 
+/**
+ * `PAGES` がリポジトリの実態とずれていないか確かめる。
+ * ページが増えたのに `PAGES` へ足し忘れると、そのページだけ検査されないまま
+ * 緑になる（`support.md` が AGENTS.md の公開対象から漏れていたのと同じ事故）。
+ */
+function findPageListDrift() {
+  const onDisk = readdirSync(REPO_ROOT)
+    .filter((name) => name.endsWith(".md") && !NON_PAGE_MARKDOWN.has(name))
+    .sort();
+  const listed = new Set(PAGES.map((page) => page.file));
+  return {
+    unlisted: onDisk.filter((name) => !listed.has(name)),
+    missingFile: PAGES.filter((page) => !existsSync(path.join(REPO_ROOT, page.file))).map(
+      (page) => page.file,
+    ),
+  };
+}
+
 async function main() {
+  const { unlisted, missingFile } = findPageListDrift();
+  if (unlisted.length > 0 || missingFile.length > 0) {
+    for (const name of unlisted) {
+      console.error(`[PAGES 未登録] ${name} が公開ページ一覧に無いため検査されません`);
+    }
+    for (const name of missingFile) {
+      console.error(`[PAGES 不整合] ${name} は一覧にあるがファイルが見つかりません`);
+    }
+    console.error("scripts/check-published-drift.mjs の PAGES を実態に合わせてください。");
+    process.exit(1);
+  }
   const { base, limit } = parseArgs(process.argv.slice(2));
   const drifted = [];
   const unreachable = [];
