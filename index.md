@@ -27,6 +27,24 @@ title: サポート
 - 衛生管理者トレ（衛生管理者免許試験 第一種・第二種。労働安全衛生法などの法令と厚生労働省の公表資料をもとに当方が作成したオリジナル問題を収録。過去の試験問題そのものは収録しません）
 - 1級建築施工管理トレ（1級建築施工管理技術検定 第一次検定・一般財団法人 建設業振興基金が公表した過去問を出典付きで収録）
 
+## 各アプリの紹介ページと、Webで解ける問題
+
+アプリの機能・試験の概要は各アプリの紹介ページに、Web で無料で解ける問題・用語集は資格ごとのサイトに載せています。全アプリの一覧は[資格試験トレーニングアプリ（pnsk.net）](https://pnsk.net/)にまとめています。
+
+- ITパスポート試験: [ITパストレの紹介](https://itpassport.pnsk.net/app/)／[ITパスポート試験 過去問](https://itpassport.pnsk.net/)
+- 情報セキュリティマネジメント試験: [SGトレの紹介](https://sg.pnsk.net/app/)／[情報セキュリティマネジメント試験（SG）過去問](https://sg.pnsk.net/)
+- 基本情報技術者試験: [FEトレの紹介](https://fe.pnsk.net/app/)／[基本情報技術者試験 科目A 練習問題](https://fe.pnsk.net/)
+- 応用情報技術者試験: [応用情報トレの紹介](https://ap.pnsk.net/app/)／[応用情報技術者試験（AP）午前 過去問](https://ap.pnsk.net/)
+- 宅地建物取引士試験: [宅建トレの紹介](https://takken.pnsk.net/app/)／[宅建（宅地建物取引士）練習問題](https://takken.pnsk.net/)
+- FP技能検定: [FPトレの紹介](https://fp.pnsk.net/app/)／[FP技能検定（2級・3級）過去問](https://fp.pnsk.net/)
+- 社会保険労務士試験: [社労士トレの紹介](https://sharoshi.pnsk.net/app/)／[社労士（社会保険労務士試験）練習問題](https://sharoshi.pnsk.net/)
+- 歯科衛生士国家試験: [歯科衛生士国試トレの紹介](https://dentalhygienist.pnsk.net/app/)／[歯科衛生士国家試験 練習問題](https://dentalhygienist.pnsk.net/)
+- 管理栄養士国家試験: [管理栄養士国試トレの紹介](https://registereddietitian.pnsk.net/app/)／[管理栄養士国家試験 過去問](https://registereddietitian.pnsk.net/)
+- 第二種電気工事士試験: [電工2種トレの紹介](https://denki2.pnsk.net/app/)／[第二種電気工事士 学科試験 過去問](https://denki2.pnsk.net/)
+- 第一種電気工事士試験: [電工1種トレの紹介](https://denki1.pnsk.net/app/)／[第一種電気工事士 学科試験 過去問](https://denki1.pnsk.net/)
+- HCD基礎検定: [HCD基礎検定トレの紹介](https://hcdbasic.pnsk.net/app/)／[HCD基礎検定 練習問題](https://hcdbasic.pnsk.net/)
+- 屋外広告士試験: [屋外広告士トレの紹介](https://ooh.pnsk.net/app/)／[屋外広告士試験 練習問題](https://ooh.pnsk.net/)
+
 ## よくある質問（FAQ）
 
 ### Q. 学習データは他の端末に引き継げますか？
@@ -62,3 +80,4 @@ SC支援士トレでは、学習履歴のサーバー同期・バックアップ
 - [プライバシーポリシー](./privacy)
 - [利用規約](./terms)
 - [特定商取引法に基づく表記](./tokushoho)
+- [資格試験トレーニングアプリの一覧（各アプリの紹介と、Webで解ける問題・用語集）](https://pnsk.net/)
